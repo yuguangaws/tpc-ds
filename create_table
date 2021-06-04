@@ -17,14 +17,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.customer(
     c_login                   string,
     c_email_address           string,
     c_last_review_date        string)
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/customer/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/customer/';
+
 
 
 CREATE EXTERNAL TABLE IF NOT EXISTS default.date_dim (
@@ -57,14 +56,14 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.date_dim (
   `d_current_quarter` string,
   `d_current_year` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/date_dim/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' 
+  LOCATION 's3://tpcds-yuguang/tpcds/date_dim/';
+
 
 
 
@@ -76,14 +75,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.household_demographics (
   `hd_dep_count` int,
   `hd_vehicle_count` int 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/household_demographics/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/household_demographics/';
+
 
 
 
@@ -92,14 +90,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.income_band (
   `ib_lower_bound` int,
   `ib_upper_bound` int 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/income_band/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/income_band/';
+
 
 
 
@@ -109,14 +106,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.inventory (
   `inv_warehouse_sk` int,
   `inv_quantity_on_hand` bigint 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/inventory/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/inventory/';
+
 
 
 
@@ -144,14 +140,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.item (
   `i_manager_id` int,
   `i_product_name` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/item/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/item/';
+
 
 
 
@@ -176,14 +171,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.promotion (
   `p_purpose` string,
   `p_discount_active` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/promotion/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/promotion/';
+
 
 
 
@@ -192,14 +186,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.reason (
   `r_reason_id` string,
   `r_reason_desc` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/reason/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/reason/';
+
 
 
 
@@ -211,14 +204,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.ship_mode (
   `sm_carrier` string,
   `sm_contract` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/ship_mode/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/ship_mode/';
+
 
 
 
@@ -253,14 +245,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.store (
   `s_gmt_offset` decimal,
   `s_tax_precentage` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/store/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/store/';
+
 
 
 
@@ -286,14 +277,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.store_returns (
   `sr_store_credit` decimal,
   `sr_net_loss` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/store_returns/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/store_returns/';
+
 
 
 
@@ -322,14 +312,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.store_sales (
   `ss_net_paid_inc_tax` decimal,
   `ss_net_profit` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/store_sales/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/store_sales/';
+
 
 
 
@@ -345,14 +334,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.time_dim (
   `t_sub_shift` string,
   `t_meal_time` string 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/time_dim/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/time_dim/';
+
 
 
 
@@ -372,14 +360,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.warehouse (
   `w_country` string,
   `w_gmt_offset` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/warehouse/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/warehouse/';
+
 
 
 
@@ -399,14 +386,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.web_page (
   `wp_image_count` int,
   `wp_max_ad_count` int 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/web_page/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/web_page/';
+
 
 
 
@@ -437,14 +423,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.web_returns (
   `wr_account_credit` decimal,
   `wr_net_loss` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/web_returns/'
-TBLPROPERTIES ('has_encrypted_data'='false');
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/web_returns/';
+
 
 
 
@@ -484,14 +469,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.web_sales (
   `ws_net_paid_inc_ship_tax` decimal,
   `ws_net_profit` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/web_sales/'
-TBLPROPERTIES ('has_encrypted_data'='false')
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' LOCATION 's3://tpcds-yuguang/tpcds/web_sales/';
 
 
 
@@ -523,11 +506,10 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.web_site (
   `web_gmt_offset` decimal,
   `web_tax_percentage` decimal 
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
-WITH SERDEPROPERTIES (
-  'serialization.format' = '|',
-  'field.delim' = '|',
-  'collection.delim' = 'undefined',
-  'mapkey.delim' = 'undefined'
-) LOCATION 's3://tpcds-yuguang/web_site/'
-TBLPROPERTIES ('has_encrypted_data'='false')
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '|' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' 
+  LOCATION 's3://tpcds-yuguang/tpcds/web_site/';
